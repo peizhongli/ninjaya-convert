@@ -27,7 +27,7 @@ export function activate(context: vscode.ExtensionContext) {
 
   // 注册打开资源管理器的命令
   const disposableOpenInExplorer = vscode.commands.registerCommand(
-    "extension.openInExplorer",
+    "ninjaya-convert.openInExplorer",
     () => openInExplorer()
   );
 

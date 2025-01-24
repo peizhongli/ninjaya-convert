@@ -1,0 +1,117 @@
+{
+  "name": "ninjaya-convert",
+  "displayName": "ninja的变量命名工具",
+  "description": "对选中变量进行英文翻译并转换",
+  "version": "0.0.1",
+  "publisher": "ninjaya",
+  "icon": "ninjaya-convert.png",
+  "engines": {
+    "vscode": "^1.54.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "ninjaya-convert.convertToCamelCase",
+        "title": "Convert to Camel Case",
+        "category": "Text Format Converter",
+        "description": "Convert selected text to camelCase."
+      },
+      {
+        "command": "ninjaya-convert.convertToPascalCase",
+        "title": "Convert to Pascal Case",
+        "category": "Text Format Converter",
+        "description": "Convert selected text to PascalCase."
+      },
+      {
+        "command": "ninjaya-convert.convertToUpperCase",
+        "title": "Convert to Upper Case",
+        "category": "Text Format Converter",
+        "description": "Convert selected text to uppercase."
+      },
+      {
+        "command": "ninjaya-convert.openInExplorer",
+        "title": "Open the Directory",
+        "category": "Text Format Converter",
+        "description": "Open the directory where the current file is located in the explorer."
+      }
+    ],
+    "configuration": {
+      "title": "ninjaya-convert Extension Configuration",
+      "properties": {
+        "ninjaya-convert.appID": {
+          "type": "string",
+          "description": "百度翻译APP ID，不设置无法执行翻译功能"
+        },
+        "ninjaya-convert.secretKey": {
+          "type": "string",
+          "description": "百度翻译密钥，不设置无法执行翻译功能"
+        },
+        "ninjaya-convert.targetLanguage": {
+          "type": "string",
+          "description": "目标语言，默认英语",
+          "default": "en"
+        }
+      }
+    },
+    "keybindings": [],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "ninjaya-convert.convertToCamelCase",
+          "when": "editorTextFocus",
+          "group": "navigation"
+        },
+        {
+          "command": "ninjaya-convert.convertToPascalCase",
+          "when": "editorTextFocus",
+          "group": "navigation"
+        },
+        {
+          "command": "ninjaya-convert.convertToUpperCase",
+          "when": "editorTextFocus",
+          "group": "navigation"
+        },
+        {
+          "command": "ninjaya-convert.openInExplorer",
+          "when": "editorTextFocus",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "npm run check-types && npm run lint && node esbuild.js",
+    "watch": "npm-run-all -p watch:*",
+    "watch:esbuild": "node esbuild.js --watch",
+    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
+    "package": "npm run check-types && npm run lint && node esbuild.js --production",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "check-types": "tsc --noEmit",
+    "lint": "eslint src --ext ts",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.6",
+    "@types/node": "18.x",
+    "@types/vscode": "^1.54.0",
+    "@typescript-eslint/eslint-plugin": "^7.7.1",
+    "@typescript-eslint/parser": "^7.7.1",
+    "@vscode/test-cli": "^0.0.9",
+    "@vscode/test-electron": "^2.3.9",
+    "esbuild": "^0.20.2",
+    "eslint": "^8.57.0",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "ninjaya-convert": "file:"
+  }
+}

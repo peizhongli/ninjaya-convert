@@ -1,8 +1,9 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from "vscode";
-import { convertText, toCamelCase, toPascalCase, toUpperCase } from "./convert";
-import { openInExplorer } from "./open";
+import { convertText, toCamelCase, toPascalCase, toUpperCase } from "./utils/convert";
+import { openInExplorer } from "./utils/open";
+import { createDir } from "./utils/create";
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
@@ -31,12 +32,19 @@ export function activate(context: vscode.ExtensionContext) {
     () => openInExplorer()
   );
 
+  // 注册创建目录命令
+  const disposableCreateDirectory = vscode.commands.registerCommand(
+    "ninjaya-convert.createDirectory",
+    (uri: vscode.Uri) => createDir(uri)
+  );
+
   // 订阅命令
   context.subscriptions.push(
     disposableCamelCase,
     disposablePascalCase,
     disposableUpperCase,
-    disposableOpenInExplorer
+    disposableOpenInExplorer,
+    disposableCreateDirectory
   );
 }
 

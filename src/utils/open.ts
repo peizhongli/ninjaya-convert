@@ -1,3 +1,8 @@
+/**
+ * @name open
+ * @desc 打开资源管理器相关
+ * @createTime 2025/02/11 09:10
+ */
 import * as vscode from "vscode";
 import * as path from "path";
 import { exec } from "child_process";

@@ -36,8 +36,12 @@
       {
         "command": "ninjaya-convert.openInExplorer",
         "title": "Open the Directory",
-        "category": "Text Format Converter",
         "description": "Open the directory where the current file is located in the explorer."
+      },
+      {
+        "command": "ninjaya-convert.createDirectory",
+        "title": "Create a Directory",
+        "description": "Create a directory."
       }
     ],
     "configuration": {
@@ -79,6 +83,13 @@
         {
           "command": "ninjaya-convert.openInExplorer",
           "when": "editorTextFocus",
+          "group": "navigation"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "ninjaya-convert.createDirectory",
+          "when": "explorerResourceIsFolder",
           "group": "navigation"
         }
       ]

@@ -1,5 +1,10 @@
+/**
+ * @name convert
+ * @desc 转换命名格式相关
+ * @createTime 2025/02/11 09:10
+ */
 import * as vscode from "vscode";
-import { translateText } from "./translate";
+import { translateChar } from "./translate";
 
 // 兼容全大写转回
 function initStr(str: string): string {
@@ -29,20 +34,6 @@ export function toPascalCase(str: string): string {
 // 将字符串转换为常量
 export function toUpperCase(str: string): string {
   return initStr(str).replace(/\s+/g, "_").toUpperCase();
-}
-
-async function translateChar(str: string): Promise<any> {
-  // 判断是否是中文字符
-  if (/^[\u4e00-\u9fa5]+$/.test(str)) {
-    const res = await translateText(str);
-    if (res.trans_result) {
-      return res.text;
-    } else {
-      return "";
-    }
-  } else {
-    return str;
-  }
 }
 
 export async function convertText(func: any) {

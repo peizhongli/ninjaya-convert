@@ -1,3 +1,8 @@
+/**
+ * @name translate
+ * @desc 翻译相关
+ * @createTime 2025/02/11 09:09
+ */
 import * as vscode from "vscode";
 import https, { RequestOptions } from "https";
 import crypto from "crypto";
@@ -92,5 +97,19 @@ export async function translateText(
   } catch (error) {
     console.error((error as Error).message);
     return null;
+  }
+}
+
+export async function translateChar(str: string): Promise<any> {
+  // 判断是否是中文字符
+  if (/^[\u4e00-\u9fa5]+$/.test(str)) {
+    const res = await translateText(str);
+    if (res.trans_result) {
+      return res.text;
+    } else {
+      return "";
+    }
+  } else {
+    return str;
   }
 }

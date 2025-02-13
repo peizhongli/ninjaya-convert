@@ -1,4 +1,5 @@
-export const generateReactTS = (componentName: string) => `
+export const generateReactJS = (componentName: string) => `
+import React, { useEffect, useState } from 'react';
 import styles from "./index.module.less";
 
 const ${componentName} = (props) => {
@@ -12,7 +13,8 @@ const ${componentName} = (props) => {
 export default ${componentName};
 
 `;
-export const generateReactJS = (componentName: string) => `
+export const generateReactTS = (componentName: string) => `
+import React, { useEffect, useState } from 'react';
 import styles from "./index.module.less";
 
 interface ${componentName}Props {

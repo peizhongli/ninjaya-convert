@@ -7,7 +7,7 @@ import * as vscode from "vscode";
 import * as fs from "fs";
 import * as path from "path";
 import { translateChar } from "./translate";
-import { toCamelCase } from "./convert";
+import { toCamelCase, toPascalCase } from "./convert";
 import { generateReactTS, generateReactJS } from "../tpl";
 
 export async function createDir(uri: vscode.Uri) {
@@ -29,12 +29,21 @@ export async function createDir(uri: vscode.Uri) {
   const newFolderPath = path.join(currentFolder, toCamelCase(translatedText));
   try {
     fs.mkdirSync(newFolderPath);
+    vscode.commands.executeCommand(
+      "revealInExplorer",
+      vscode.Uri.file(currentFolder)
+    );
   } catch (error) {
     vscode.window.showErrorMessage(`Failed to create folder: ${error}`);
     return;
   }
   // 弹出选择框让用户选择要生成的文件
-  const fileOptions = ["index.js", "index.module.less", "constant.js"];
+  const fileOptions = [
+    "index.js",
+    "index.ts",
+    "index.module.less",
+    "constant.js",
+  ];
   const selectedFiles = await vscode.window.showQuickPick(fileOptions, {
     canPickMany: true,
     placeHolder: "Select files to generate",
@@ -42,18 +51,29 @@ export async function createDir(uri: vscode.Uri) {
   if (selectedFiles) {
     // 生成选中的文件
     selectedFiles.forEach((file) => {
+      let str = "";
+      switch (file) {
+        case "index.js":
+          str = generateReactJS(toPascalCase(translatedText));
+
+          break;
+        case "index.ts":
+          str = generateReactTS(toPascalCase(translatedText));
+
+          break;
+        default:
+          break;
+      }
       const filePath = path.join(newFolderPath, file);
-      fs.writeFileSync(filePath, "");
+      fs.writeFile(filePath, str, "utf8", (err) => {
+        if (!err) {
+          vscode.commands.executeCommand(
+            "revealInExplorer",
+            vscode.Uri.file(path.join(newFolderPath, file))
+          );
+        }
+      });
     });
-    vscode.window.showInformationMessage(`${folderName} has created.😊`);
   }
-  await vscode.commands.executeCommand(
-    "revealInExplorer",
-    vscode.Uri.file(currentFolder)
-  );
-  await new Promise((resolve) => setTimeout(resolve, 500));
-  await vscode.commands.executeCommand(
-    "revealInExplorer",
-    vscode.Uri.file(newFolderPath)
-  );
+  vscode.window.showInformationMessage(`${folderName} has created.😊`);
 }

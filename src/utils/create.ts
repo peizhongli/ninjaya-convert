@@ -55,11 +55,11 @@ export async function createDir(uri: vscode.Uri) {
     selectedFiles.forEach((file) => {
       let str = "";
       switch (file) {
-        case "index.js":
+        case "index.jsx":
           str = generateReactJS(toPascalCase(translatedText));
 
           break;
-        case "index.ts":
+        case "index.tsx":
           str = generateReactTS(toPascalCase(translatedText));
 
           break;

@@ -59,6 +59,11 @@
           "type": "string",
           "description": "目标语言，默认英语",
           "default": "en"
+        },
+        "ninjaya-convert.createDirectoryList": {
+          "type": "string",
+          "description": "创建目录时备选的文件命名，用“,”分隔",
+          "default": "index.jsx,index.tsx,index.module.less,constant.js"
         }
       }
     },
@@ -123,6 +128,5 @@
     "typescript": "^5.4.5"
   },
   "dependencies": {
-    "ninjaya-convert": "file:"
   }
 }

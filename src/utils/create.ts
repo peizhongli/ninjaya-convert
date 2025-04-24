@@ -10,6 +10,8 @@ import { translateChar } from "./translate";
 import { toCamelCase, toPascalCase } from "./convert";
 import { generateReactTS, generateReactJS } from "../tpl";
 
+const config = vscode.workspace.getConfiguration("ninjaya-convert");
+const createDirectoryList = config.get<string>("createDirectoryList") as string;
 export async function createDir(uri: vscode.Uri) {
   // 获取当前选中的文件夹路径
   if (!uri) {
@@ -38,7 +40,7 @@ export async function createDir(uri: vscode.Uri) {
     return;
   }
   // 弹出选择框让用户选择要生成的文件
-  const fileOptions = [
+  const fileOptions = createDirectoryList?.split(",") || [
     "index.jsx",
     "index.tsx",
     "index.module.less",

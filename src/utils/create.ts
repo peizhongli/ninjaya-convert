@@ -39,8 +39,8 @@ export async function createDir(uri: vscode.Uri) {
   }
   // 弹出选择框让用户选择要生成的文件
   const fileOptions = [
-    "index.js",
-    "index.ts",
+    "index.jsx",
+    "index.tsx",
     "index.module.less",
     "constant.js",
   ];

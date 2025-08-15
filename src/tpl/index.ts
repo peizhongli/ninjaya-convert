@@ -5,7 +5,7 @@ import styles from "./index.module.less";
 const ${componentName} = (props, ref) => {
 
   useImperativeHandle(ref, () => ({
-      
+    
   }));
 
   return (
@@ -31,7 +31,7 @@ interface ${componentName}Props {
 const ${componentName} = (props: ${componentName}Props, ref) => {
 
   useImperativeHandle(ref, () => ({
-      
+    
   }));
 
   return (

@@ -106,7 +106,7 @@
     "watch": "npm-run-all -p watch:*",
     "watch:esbuild": "node esbuild.js --watch",
     "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
-    "package": "npm run check-types && npm run lint && node esbuild.js --production",
+    "package": "vsce package",
     "compile-tests": "tsc -p . --outDir out",
     "watch-tests": "tsc -p . -w --outDir out",
     "pretest": "npm run compile-tests && npm run compile && npm run lint",
@@ -128,5 +128,6 @@
     "typescript": "^5.4.5"
   },
   "dependencies": {
-  }
+  },
+  "repository": "https://github.com/peizhongli/ninjaya-convert.git"
 }

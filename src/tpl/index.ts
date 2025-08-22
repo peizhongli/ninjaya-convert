@@ -2,7 +2,7 @@ export const generateReactJS = (componentName: string) => `
 import React, { useEffect, useState, useMemo, useRef, forwardRef, useImperativeHandle } from 'react';
 import styles from "./index.module.less";
 
-const ${componentName} = (props, ref) => {
+const ${componentName} = forwardRef((props, ref) => {
 
   useImperativeHandle(ref, () => ({
     
@@ -13,7 +13,7 @@ const ${componentName} = (props, ref) => {
       
     </div>
   );
-};
+});
 
 ${componentName}.displayName = "${componentName}";
 
@@ -28,7 +28,7 @@ interface ${componentName}Props {
 
 }
 
-const ${componentName} = (props: ${componentName}Props, ref) => {
+const ${componentName} = forwardRef((props: ${componentName}Props, ref) => {
 
   useImperativeHandle(ref, () => ({
     
@@ -39,7 +39,7 @@ const ${componentName} = (props: ${componentName}Props, ref) => {
       
     </div>
   );
-};
+});
 
 ${componentName}.displayName = "${componentName}";
 
